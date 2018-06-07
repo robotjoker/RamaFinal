@@ -1,13 +1,13 @@
-<html>
+html>
 <title>
-Products page
+Rama Final 2
 </title>
-
 <head>
-<link rel="stylesheet" type="text/css" href="ramaFinal.css"/>
-<div class="header2">
-<h1>Nebula Customs</h1>
-<h3>Products</h3>
+<link rel="stylesheet" type="text/css" href="rama2.css"/>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<div class="header">
+<h1>Claws & Gills</h1>
+<h3>From the ocean floor to the top of the trees! </h3>
 </div>
 </head>
 <body>
@@ -15,108 +15,125 @@ Products page
 <div class="topnav">
   <a href="index.html">Home</a>
   <a href="products.html">Products</a>
-  <a href="archieves.html">Archive</a>
-  <a href="services.html">Services</a>
-    <input type="text" placeholder="Search..">
-
+  <a href="cart.html" class="btn btn-info btn-lg">
+          <span class="glyphicon glyphicon-shopping-cart"></span> Shopping Cart
+        </a>
+ 
 </div>
 <br><br>
-<div class="slideshow-container">
 
-  <!-- pictures -->
-  <div class="mySlides fade">
-    <div class="numbertext">1 / 3</div>
-    <img src="http://www.on-ou-off.tv/wp-content/uploads/2012/06/4fd8595f270823ac6b6dca6e_4fd85925270823ac6b6dca63.jpg" style="width:100%">
-  </div>
-
-  <div class="mySlides fade">
-    <div class="numbertext">2 / 3</div>
-    <img src="comp3.jpg" style="width:75%">
-  </div>
-
-  <div class="mySlides fade">
-    <div class="numbertext">3 / 3</div>
-    <img src="comp2.jpg" style="width:100%">
-  </div>
-  
-  
-  <!-- Next and previous buttons -->
-  <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-  <a class="next" onclick="plusSlides(1)">&#10095;</a>
-</div>
+ 
+<div class="search-container">
+      <input type="text" placeholder="Search" name="search">
+    </div>
+	</div>
+	
 <br>
-
-<!--dots -->
-<div style="text-align:center">
-  <span class="dot" onclick="currentSlide(1)"></span> 
-  <span class="dot" onclick="currentSlide(2)"></span> 
-  <span class="dot" onclick="currentSlide(3)"></span> 
-   
-
-</div>
+<div class="container">
+	<div class="row">
+	
+	<div class="column">
+	<img src="http://www.turtleholic.com/wp-content/uploads/2016/08/Where-Can-I-Find-Turtles-e1515548886148.png" height="250px" width="250px">
+	<br>
+	<div class="info">
+	<p>Yellow Belly Sliders</p>
+	<button><a class="add-to-cart" href="12.49" data-name="yellowTurt" data-price="12.49">Add to cart</a></button>
+	</div>
+		<br>
+	<img src="https://static.boredpanda.com/blog/wp-content/uploads/2017/03/irish-setter-gives-birth-15-puppies-mother-day-poppy-3.jpg" height="250px" width="250px">
+	<br>
+	<div class="info">
+	<p>Brown Lab Puppies</p>
+	<button><a class="add-to-cart" href="64.49" data-name="dogs" data-price="64.49">Add to cart</a></button>
+	
+	</div>
+	<br>
+	<img src="https://www.gannett-cdn.com/-mm-/fb55c86d343fa759a3d448801e3d45037d53ff78/c=0-1-3713-2793&r=x393&c=520x390/local/-/media/2017/03/23/Cincinnati/Cincinnati/636258861103473387-IMG-9183.jpg" height="250px" width="250px">
+	<br>
+	<div class="info">
+	<p>Hippo baby</p>
+	<button><a class="add-to-cart" href="8999.99" data-name="hippo" data-price="8999.99">Add to cart</a></button>
+	
+	</div>
+	</div>
 
 <script>
-var slideIndex = 1;
-showSlides(slideIndex);
+	$(".add-to-cart").click(function(event) {
+            event.preventDefault();
+            var name = $(this).attr("data-name");
+            var price = Number($(this).attr("data-price"));
 
-function plusSlides(n) {
-  showSlides(slideIndex += n);
-}
+            shoppingCart.addItemToCart(name, price, 1);
+            displayCart();
+        });
 
-function currentSlide(n) {
-  showSlides(slideIndex = n);
-}
+        $("#clear-cart").click(function(event) {
+            shoppingCart.clearCart();
+            displayCart();
+        });
 
-function showSlides(n) {
-  var i;
-  var slides = document.getElementsByClassName("mySlides");
-  var dots = document.getElementsByClassName("dot");
-  if (n > slides.length) {slideIndex = 1}    
-  if (n < 1) {slideIndex = slides.length}
-  for (i = 0; i < slides.length; i++) {
-      slides[i].style.display = "none";  
-  }
-  for (i = 0; i < dots.length; i++) {
-      dots[i].className = dots[i].className.replace(" active", "");
-  }
-  slides[slideIndex-1].style.display = "block";  
-  dots[slideIndex-1].className += " active";
-}
+        function displayCart() {
+            var cartArray = shoppingCart.listCart();
+            console.log(cartArray);
+            var output = "";
+
+            for (var i in cartArray) {
+                output += "<li>" +
+                    cartArray[i].name +
+                    " <input class='item-count' type='number' data-name='" +
+                    cartArray[i].name +
+                    "' value='" + cartArray[i].count + "' >" +
+                    " x " + cartArray[i].price +
+                    " = " + cartArray[i].total +
+                    " <button class='plus-item' data-name='" +
+                    cartArray[i].name + "'>+</button>" +
+                    " <button class='subtract-item' data-name='" +
+                    cartArray[i].name + "'>-</button>" +
+                    " <button class='delete-item' data-name='" +
+                    cartArray[i].name + "'>Remove</button>" +
+                    "</li>";
+            }
+
+            $("#show-cart").html(output);
+            $("#count-cart").html(shoppingCart.countCart());
+            $("#total-cart").html(shoppingCart.totalCart());
+        }
+
+        $("#show-cart").on("click", ".delete-item", function(event) {
+            var name = $(this).attr("data-name");
+            shoppingCart.removeItemFromCartAll(name);
+            displayCart();
+        });
+
+        $("#show-cart").on("click", ".subtract-item", function(event) {
+            var name = $(this).attr("data-name");
+            shoppingCart.removeItemFromCart(name);
+            displayCart();
+        });
+
+        $("#show-cart").on("click", ".plus-item", function(event) {
+            var name = $(this).attr("data-name");
+            shoppingCart.addItemToCart(name, 0, 1);
+            displayCart();
+        });
+
+        $("#show-cart").on("change", ".item-count", function(event) {
+            var name = $(this).attr("data-name");
+            var count = Number($(this).val());
+            shoppingCart.setCountForItem(name, count);
+            displayCart();
+        });
+
+
+        displayCart();
+
 </script>
 
-<div class="row">
-<div class="column side">
 
 
-<h2>Sort/ Filter</h2>
-<hr>
-<ul>
-<li>Low to High</li>
-<br>
-<li> High to Low</li>
-<br>
-<li>Most Recommended</li>
-<br>
-<li>Highest Voted</li>
-</ul>
-</div>
-
-<div class="column middle">
- 
-<h2> Components</h2>
-<hr><br>
-<div class="itemsP">
-<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyFcTw6ueUURXl3bt64Gcq6iwywcD8HjaGqfYhL-TvHJ0LlSSBMQ " style="width:100%">
-<p>800$</p>
-<hr><br>
-<img src="https://images10.newegg.com/NeweggImage/ProductImage/20-232-476-S01.jpg " style="width:100%">
-<p>199$</p>
 
 
-</div>
-</div>
 
 
 </body>
-
 </html>
