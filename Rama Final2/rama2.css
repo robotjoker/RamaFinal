@@ -1,0 +1,89 @@
+/* Rama Final 2 CSS*/
+.header{
+background-color:#f1f1f1;
+ overflow: hidden;
+  padding: 20px 10px;
+  margin-bottom:50px;
+}
+.header-right {
+  float: right;
+}
+h1{
+	text-align:center;
+	font-weight:bold;
+	font-size:50px;
+}
+.header a {
+  float: left;
+  color: black;
+  text-align: center;
+  padding: 12px;
+  text-decoration: none;
+  font-size: 18px; 
+  line-height: 25px;
+  border-radius: 4px;
+}
+.header a.logo {
+  font-size: 45px;
+  font-weight: bold;
+  font-family:"Trebuchet MS", Helvetica, sans-serif;
+}
+.header a.active {
+  background-color: dodgerblue;
+  color: white;
+}
+body{
+ 
+background-color:#b3ffb3;
+}
+.topnav {
+  overflow: hidden;
+  background-color:  #f2f2f2;
+  box-sizing: border-box;
+
+}
+
+.topnav a {
+  float: left;
+  color: black;
+  text-align: center;
+  padding: 14px 16px;
+  font-size: 17px;
+  width: 25%;
+}
+
+.topnav a:hover {
+  background-color: a6a6a6;
+  color: black;
+}
+
+/*Index nav bar end*/
+* {box-sizing:border-box}
+
+}
+.container{
+	text-align:center;
+}
+.info{
+	text-align:center;
+	font-weight:bold;
+	 display: center;
+	
+}
+.cart{
+	background-color:#f2f2f2;
+}
+.w3-btn {
+	width:150px;
+	}
+	
+@media screen and (max-width: 500px) {
+  .header a {
+    float: none;
+    display: block;
+    text-align: left;
+  }
+  .header-right {
+    float: none;
+  }
+}

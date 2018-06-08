@@ -1,0 +1,185 @@
+<html>
+<title>
+Rama Final 2
+</title>
+
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="rama2.css"/>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+</head>
+
+<body>
+
+<div class="header">
+<a href="index.html" class="logo">Claws & Gills</a>
+ <div class="header-right">
+  <a href="index.html">Home</a>
+  <a class="active" href="products.html">Products</a>
+  
+
+	</div>
+	</div>
+<br>
+
+<div class="container">
+
+	<div class="row">
+	
+	<div class="info">
+	<img src="http://www.turtleholic.com/wp-content/uploads/2016/08/Where-Can-I-Find-Turtles-e1515548886148.png" height="250px" width="250px">
+	<br>
+	
+	<div class="w3-container">
+	<p>Yellow Belly Sliders</p>
+	<p>$ 12.49</p>
+	
+	<button class="subtract-item">-</button>
+	<button  class="add-to-cart" href="12.49" data-name="turts" data-price="12.49">Add To Cart</button>
+	
+	<button class="plus-item">+</button>
+	</div>
+	</div>
+		<br>
+		
+	<div class="info">	
+	<img src="https://static.boredpanda.com/blog/wp-content/uploads/2017/03/irish-setter-gives-birth-15-puppies-mother-day-poppy-3.jpg" height="250px" width="250px">
+	<br>
+	
+	<div class="w3-container">
+
+	<p>Brown Lab Puppies</p>
+	<p>$64.49</p>
+	</div>
+	<button class="subtract-item">-</button>
+	<button  class="add-to-cart"href="64.49" data-name="dogs" data-price="64.49">Add To Cart</button>
+	
+	<button class="plus-item">+</button>
+	</div>
+	
+	<br>
+	<div class="info">
+	<img src="https://www.gannett-cdn.com/-mm-/fb55c86d343fa759a3d448801e3d45037d53ff78/c=0-1-3713-2793&r=x393&c=520x390/local/-/media/2017/03/23/Cincinnati/Cincinnati/636258861103473387-IMG-9183.jpg" height="250px" width="250px">
+	<br>
+	
+	<div class="w3-container">
+	
+	<p>Baby Hippo</p>
+	<p>$8999.49</p>
+	</div>
+	
+	<button class="subtract-item">-</button>
+	
+	<button class="add-to-cart" href="8999.49" data-name="hippo" data-price="8999.49">Add To Cart</button>
+	
+	<button class="plus-item">+</button>
+	</div>
+<br>
+	</div>
+	<div class="container">
+	<div class="row">
+	<div class="info">
+	<img src="http://wolf.org/wp-content/uploads/2016/06/Axel_arasberry_61216_3614.jpg" height="250px" width="250px">
+	<br>
+	<div class="w3-container">
+	<p>Wolf Pup</p>
+	<p>$ 579.99</p>
+	</div>
+	<button class="subtract-item">-</button>
+	
+	<button class="add-to-cart" href="8999.49" data-name="hippo" data-price="8999.49">Add To Cart</button>
+	
+	<button class="plus-item">+</button>
+	</div>
+	<br>
+	<br>
+	<h2> Cart</h2>
+	 
+	 <div class="cart">
+        <ul id="show-cart"></ul>
+        <div id="p1">You have <span id="count-cart">X</span> items in your cart</div>
+        <div id="p1">Total Cart:$<span id="total-cart"></span></div>
+    </div>
+	
+<script>
+	$(".add-to-cart").click(function(event) {
+            event.preventDefault();
+            var name = $(this).attr("data-name");
+            var price = Number($(this).attr("data-price"));
+
+            cart.addItemToCart(name, price, 1);
+            displayCart();
+        });
+
+        
+
+        function displayCart() {
+            var cartArray = cart.listCart();
+            console.log(cartArray);
+            var output = "";
+
+            for (var i in cartArray) {
+                output += "<li>" +
+                    cartArray[i].name +
+                    " <input class='item-count' type='number' data-name='" +
+                    cartArray[i].name +
+                    "' value='" + cartArray[i].count + "' >" +
+                    " x " + cartArray[i].price +
+                    " = " + cartArray[i].total +
+                    " <button class='plus-item' data-name='" +
+                    cartArray[i].name + "'>+</button>" +
+                    " <button class='subtract-item' data-name='" +
+                    cartArray[i].name + "'>-</button>" +
+                    " <button class='delete-item' data-name='" 
+                +
+                    "</li>";
+            }
+
+            $("#show-cart").html(output);
+            $("#count-cart").html(cart.countCart());
+            $("#total-cart").html(cart.totalCart());
+        }
+
+        $("#show-cart").on("click", ".subtract-item", function(event) {
+            var name = $(this).attr("data-name");
+            cart.removeItemFromCart(name);
+            cart.removeItemFromCart(count,1)
+			displayCart();
+        });
+
+        $("#show-cart").on("click", ".plus-item", function(event) {
+            var name = $(this).attr("data-name");
+            cart.addItemToCart(name, 0, 1);
+            displayCart();
+        });
+
+        $("#show-cart").on("change", ".item-count", function(event) {
+            var name = $(this).attr("data-name");
+            var count = Number($(this).val());
+            cart.setCountForItem(name, count);
+            displayCart();
+        });
+		$("#total-cart").on("change",".item-count", function(event){
+		if(price<100){
+		alert("Please use cash");
+		}
+		else {
+		alert("We can set up a credit for your purchase.");
+		}
+}
+		$("#priceWithTax").on("change",".total-cart", function(event){
+		 var totalCost= total-cart * .075;
+		}
+        displayCart();
+
+</script>
+
+
+
+
+
+
+
+</body>
+</html>
